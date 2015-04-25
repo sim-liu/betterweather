@@ -1,6 +1,7 @@
 package com.betterweather.app.activity;
 
 import com.betterweather.app.R;
+import com.betterweather.app.service.AutoUpdateService;
 import com.betterweather.app.util.HttpCallbackListener;
 import com.betterweather.app.util.HttpUitl;
 import com.betterweather.app.util.Utility;
@@ -12,6 +13,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -189,5 +191,12 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		currentDateText.setText(prefs.getString("current_date", ""));
 		weatherInfoLayout.setVisibility(View.VISIBLE);
 		cityNameText.setVisibility(View.VISIBLE);
+		
+		Log.d("WeatherActivity", "显示天气");
+		
+		//启动定时服务
+		Intent intent = new Intent(this, AutoUpdateService.class);
+		startService(intent);
+		
 	}
 }
