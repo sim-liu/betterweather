@@ -31,6 +31,7 @@ public class BetterWeatherDB {
 		// TODO Auto-generated constructor stub
 		BetterWeatherOpenHelper dbHelper = new BetterWeatherOpenHelper(context,
 				DB_NAME, null, VERSION);
+		db = dbHelper.getWritableDatabase();
 	}
 
 	/**
@@ -40,7 +41,7 @@ public class BetterWeatherDB {
 	 * @return
 	 */
 	public synchronized static BetterWeatherDB getInstance(Context context) {
-		if (betterWeatherDB != null) {
+		if (betterWeatherDB == null) {
 			betterWeatherDB = new BetterWeatherDB(context);
 		}
 		return betterWeatherDB;
@@ -96,7 +97,7 @@ public class BetterWeatherDB {
 			values.put("city_code", city.getCityCode());
 			values.put("province_id", city.getProvinceId());
 
-			db.insert("Country", null, values);
+			db.insert("City", null, values);
 		}
 	}
 
@@ -156,7 +157,7 @@ public class BetterWeatherDB {
 		Cursor cursor = db.query("Country", null, "city_id = ?",
 				new String[] { String.valueOf(cityId) }, null, null, null);
 		
-		if(cursor !=null)
+		if(cursor.moveToFirst())
 		{
 			do
 			{

@@ -30,7 +30,7 @@ public class BetterWeatherOpenHelper extends SQLiteOpenHelper {
 	public static final String CREATE_COUNTRY = "create table Country ("
 			+ "id integer primary key autoincrement, "
 			+ "country_name text, "
-			+ "country_city text, "
+			+ "country_code text, "
 			+ "city_id integer) ";
 	
 	public BetterWeatherOpenHelper(Context context, String name,
